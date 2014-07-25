@@ -36,6 +36,16 @@
     [self.game chooseCardAtIndex:chosenButtonIndex];
     [self updateUI];
 }
+- (IBAction)newGameButton:(UIButton *)sender {
+    self.scoreLabel.text = @"Score: 0";
+    _game = nil;
+    [self game];
+    [self updateUI];
+    
+}
+- (IBAction)ruleChanger:(UISwitch *)sender {
+    
+}
 
 -   (void)updateUI
 {
