@@ -12,16 +12,25 @@
 
 - (int)match:(NSArray *)otherCards
 {
+    //match rules for comparison to another card
     int score = 0;
-    
-    if ([otherCards count] == 1){
-        PlayingCard *otherCard = [otherCards firstObject];
-        if (otherCard.rank == self.rank) {
-            score = 4;
-        } else if ([otherCard.suit isEqualToString:self.suit]){
-            score = 1;
+    int numOtherCards = [otherCards count];
+    if (numOtherCards){
+        for (Card *card in otherCards){
+            if ([card isKindOfClass:[PlayingCard class]]){
+                PlayingCard *otherCard = (PlayingCard *)card;
+                if (otherCard.rank == self.rank) {
+                    score += 4;
+                } else if ([otherCard.suit isEqualToString:self.suit]){
+                    score += 1;
+                }
+            }
         }
     
+    }
+    //3 card match rules to create a higher score
+    if (numOtherCards > 1){
+        score += [[otherCards firstObject] match: [otherCards subarrayWithRange:NSMakeRange(1, numOtherCards - 1)]];
     }
     return score;
 }

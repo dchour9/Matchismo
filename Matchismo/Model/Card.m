@@ -13,7 +13,7 @@
 - (int)match:(NSArray *)otherCards
 {
     int score = 0;
-    
+    //determines if card is equal to another..overridden in playingCard
     for (Card *card in otherCards){
         if ([card.contents isEqualToString:self.contents]){
             score = 1;
